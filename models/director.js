@@ -12,39 +12,37 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         validate: {
-          allowNull: false,
           notEmpty: true,
           isAlpha: true,
         },
+        allowNull: false,
       },
       surname: {
         type: DataTypes.STRING,
         validate: {
-          allowNull: false,
           notEmpty: true,
           isAlpha: true,
         },
+        allowNull: false,
       },
       country: {
         type: DataTypes.STRING,
         validate: {
-          allowNull: false,
           notEmpty: true,
           isAlpha: true,
         },
+        allowNull: false,
       },
       birth: {
         type: DataTypes.DATE,
         validate: {
-          allowNull: false,
           isDate: true,
         },
+        allowNull: false,
       },
       gender: {
         type: DataTypes.ENUM("Male", "Female", "Other"),
-        validate: {
-          allowNull: false,
-        },
+        allowNull: false,
       },
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,

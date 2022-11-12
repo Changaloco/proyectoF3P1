@@ -6,24 +6,24 @@ module.exports = (sequelize) => {
     id_user: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: {
       type: DataTypes.STRING,
+      allowNull:false,
       validate: {
-        allowNull:false,
         isAlpha: true,
         notEmpty: true,
       }
     },
     surname: {
       type: DataTypes.STRING,
+      allowNull:false,
       validate: {
-        allowNull:false,
         isAlpha: true,
         notEmpty: true,
       }
     },
     email: {
       type: DataTypes.STRING,
+      allowNull:false,
       validate: {
-        allowNull:false,
         notEmpty: true,
         isEmail: true,
         isLowercase: true,

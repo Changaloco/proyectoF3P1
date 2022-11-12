@@ -13,34 +13,28 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         validate: {
             notEmpty: true,
-            allowNull:false,
             isAlphanumeric: true,
-        }
+        },
+        allowNull:false,
       },
       date: {
         type: DataTypes.DATE,
+        allowNull:false,
         validate: {
-            allowNull:false,
             isDate: true,
         }
       },
       duration: {
         type: DataTypes.FLOAT,
-        validate: {
-            allowNull:false,
-        }
+        allowNull:false,
       },
       plot: {
         type: DataTypes.TEXT,
-        validate: {
-            allowNull:false,
-        }
+        allowNull:false,
       },
       poster: {
         type: DataTypes.STRING,
-        validate: {
-            allowNull:false,
-        }
+        allowNull:false,
       },
       fk_id_director: {
         type: DataTypes.INTEGER,

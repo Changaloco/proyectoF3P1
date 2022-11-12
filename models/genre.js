@@ -5,8 +5,8 @@ module.exports = (sequelize) => {
         id_genre: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
         name: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
-            allowNull: false,
             notEmpty: true,
         }
         },
