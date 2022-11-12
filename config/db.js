@@ -34,3 +34,4 @@ casts.belongsTo(movies, { foreignKey: "fk_id_movie"});
 
 
 module.exports = sequelize;
+

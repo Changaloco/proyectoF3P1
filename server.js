@@ -5,7 +5,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const app = express();
 
-const {sequelize} = require("./config/db");
+const sequelize = require("./config/db");
 
 
 app.use(helmet());
@@ -19,8 +19,16 @@ app.use(morgan("dev"));
 app.get("/", (request, response) => {
   response.json({ info: "API --> Peliculas V1" });
 });
-
+app.use('/api', require('./routes'))
 app.listen(process.env.PORT || 3001, () => {
   console.log(`Server Started on port ${process.env.PORT || 3001}`);
 });
 
+try{
+  sequelize.authenticate();
+  sequelize.sync({force:false}).then(() => {
+    console.log("Database succefully conected!");
+  });
+}catch(e){
+  console.log(e)
+}
