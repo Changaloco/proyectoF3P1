@@ -4,7 +4,6 @@ const sequelize = require('../config/db')
 const User = sequelize.models.users;
 const jwt = require('jsonwebtoken');
 
-
 function generateAccessToken(user) {
     return jwt.sign({id_user:user.id_user},'drsexo',{
         expiresIn: '8h'
