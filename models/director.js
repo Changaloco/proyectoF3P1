@@ -27,11 +27,11 @@ module.exports = (sequelize) => {
       },
       country: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           notEmpty: true,
           isAlpha: true,
         },
-        allowNull: false,
       },
       birth: {
         type: DataTypes.DATE,

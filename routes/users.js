@@ -2,8 +2,7 @@ const express = require('express')
 const router = express.Router()
 const sequelize = require('../config/db')
 const User = sequelize.models.users;
-const jwt = require('jsonwebtoken')
-const {development, production} = require("../config/config");
+const jwt = require('jsonwebtoken');
 
 
 function generateAccessToken(user) {
