@@ -25,10 +25,12 @@ app.listen(process.env.PORT || 3001, () => {
 });
 
 try{
-  sequelize.authenticate();
+  sequelize.authenticate().then(() => {
+    console.log("Connection has been established successfully!");
+  });
   sequelize.sync({force:false}).then(() => {
-    console.log("Database succefully conected!");
+    console.log("Database verification correct!");
   });
 }catch(e){
-  console.log(e)
+  console.log(`Database conecttion error: ${e}`);
 }
