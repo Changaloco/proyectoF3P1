@@ -5,6 +5,9 @@ const cors = require("cors");
 const morgan = require("morgan");
 const app = express();
 
+const {sequelize} = require("./config/db");
+
+
 app.use(helmet());
 app.use(cors());
 
@@ -18,5 +21,6 @@ app.get("/", (request, response) => {
 });
 
 app.listen(process.env.PORT || 3001, () => {
-  console.log(`Server Started`);
+  console.log(`Server Started on port ${process.env.PORT || 3001}`);
 });
+

@@ -4,11 +4,36 @@ const bcrypt = require('bcrypt');
 module.exports = (sequelize) => {
   const User = sequelize.define('users', {
     id_user: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: DataTypes.STRING,
-    surname: DataTypes.STRING,
-    email: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        allowNull:false,
+        isAlpha: true,
+        notEmpty: true,
+      }
+    },
+    surname: {
+      type: DataTypes.STRING,
+      validate: {
+        allowNull:false,
+        isAlpha: true,
+        notEmpty: true,
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        allowNull:false,
+        notEmpty: true,
+        isEmail: true,
+        isLowercase: true,
+      }
+    },
     password: DataTypes.STRING,
-    type: DataTypes.ENUM('admin', 'user'),
+    type: {
+      type:DataTypes.ENUM('admin', 'user'),
+      defaultValue: 'user',
+    },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   }, {
@@ -19,13 +44,12 @@ module.exports = (sequelize) => {
         user.createdAt = new Date();
         user.updatedAt = new Date();
       },
-      beforeUpdate: function (order, options) {
-        order.updatedAt = new Date();
+      beforeUpdate: function (user, options) {
+        user.updatedAt = new Date();
       }
     },
 
   });
-
   User.prototype.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password)
   }
