@@ -18,7 +18,7 @@ module.exports = {
         },
         onDelete: 'CASCADE'
       },
-      fk_id_gender: {
+      fk_id_genre: {
         type: Sequelize.INTEGER,
         references: {
           model: 'genres',

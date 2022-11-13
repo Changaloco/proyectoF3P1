@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
-const {development, production} = require("./config");
+const config = require("./config");
 
 const actorModel = require("../models/Actor");
 const directorModel = require("../models/Director");
@@ -9,10 +9,10 @@ const movieModel = require("../models/Movie");
 const castModel = require("../models/Cast");
 const userModel = require("../models/User");
 
-const sequelize = new Sequelize(development.database, development.username, development.password, {
-  host: development.host,
-  dialect: development.dialect,
-  port: development.port,
+const sequelize = new Sequelize(config.database, config.username, config.password, {
+  host: config.host,
+  dialect: config.dialect,
+  port: config.port,
   logging: false,
 });
 

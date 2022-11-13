@@ -2,14 +2,15 @@ const express = require("express");
 const router = express.Router();
 const sequelize = require("../config/db");
 const Director = sequelize.models.directors;
+const Movie = sequelize.models.movies;
 const authorization = require("../middlewares/authorization");
 
 router.get("/", authorization("user", "admin"), async (req, res) => {
   try {
     const directors = await Director.findAll();
-    res.status(200).json(directors);
+    return res.status(200).json(directors);
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    return res.status(500).json({ message: e.message });
   }
 });
 
@@ -19,9 +20,9 @@ router.get("/:id", authorization("user", "admin"), async (req, res) => {
     const director = await Director.findByPk(id);
     if (!director)
       return res.status(404).json({ message: "Director not found" });
-    res.status(200).json(director);
+    return res.status(200).json(director);
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    return res.status(500).json({ message: e.message });
   }
 });
 
@@ -30,10 +31,9 @@ router.post("/", authorization("admin"), async (req, res) => {
   try {
     const director = await Director.create(body);
     await director.save();
-    res.status(201).json(director);
+    return res.status(201).json(director);
   } catch (e) {
-    console.log(e);
-    res.status(500).json({ message: e.message });
+    return res.status(500).json({ message: e.message });
   }
 });
 
@@ -45,9 +45,23 @@ router.patch("/:id", authorization("admin"), async (req, res) => {
     if (!director)
       return res.status(404).json({ message: "Director not found" });
     await director.update(body);
-    res.status(200).json(director);
+    return res.status(200).json(director);
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    return res.status(500).json({ message: e.message });
+  }
+});
+
+router.get("/:id/movies", authorization("user", "admin"), async (req, res) => {
+  const { id } = req.params;
+  try {
+    const director = await Director.findByPk(id, {
+      include: [{ model: Movie, attributes: ["id_movie", "title", "date"] }],
+    });
+    if (!director)
+      return res.status(404).json({ message: "Director not found" });
+    return res.status(201).json(director);
+  } catch (e) {
+    return res.status(500).json({ message: e.message });
   }
 });
 
@@ -58,9 +72,9 @@ router.delete("/:id", authorization("admin"), async (req, res) => {
     if (!director)
       return res.status(404).json({ message: "Director not found" });
     await director.destroy();
-    res.status(200).json({ message: "Director deleted" });
+    return res.status(200).json({ message: "Director deleted" });
   } catch (e) {
-    res.status(500).json({ message: e.message });
+    return res.status(500).json({ message: e.message });
   }
 });
 

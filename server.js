@@ -3,6 +3,8 @@ const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
 const morgan = require("morgan");
+const config = require("./config/config");
+const port = config.appPort;
 const app = express();
 
 const sequelize = require("./config/db");
@@ -20,7 +22,7 @@ app.get("/", (request, response) => {
   response.json({ info: "API --> Peliculas V1" });
 });
 app.use('/api', require('./routes'))
-app.listen(process.env.PORT || 3001, () => {
+app.listen(port || 3001, () => {
   console.log(`Server Started on port ${process.env.PORT || 3001}`);
 });
 

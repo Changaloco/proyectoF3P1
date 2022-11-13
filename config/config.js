@@ -1,15 +1,27 @@
 require('dotenv').config();
 
-const defaultConfig = {
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
+const config = {
+  username: "root",
+  password: "",
+  database: "moviesbedu",
+  host: "127.0.0.1",
+  port: 3306,
   dialect: 'mysql',
+  appPort: 3000,
+  secret: 'elpalancasjimenez',
+  secretExp: '1m'
 };
 
-module.exports = {
-  development: defaultConfig,
-  production: Object.assign(defaultConfig, {}),
-};
+if(process.env.NODE_ENV == 'production'){
+  config.username = process.env.DB_USER;
+  config.password = process.env.DB_PASSWORD;
+  config.database = process.env.DB_DATABASE;
+  config.host = process.env.DB_HOST;
+  config.port = process.env.DB_PORT;
+  config.appPort = process.env.APP_PORT;
+  config.secret = process.env.JWT_SECRETKEY;
+  config.secretExp = process.env.JWT_EXPIRESIN;
+}
+
+
+module.exports = config;
