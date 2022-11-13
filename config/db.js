@@ -2,12 +2,12 @@ const { Sequelize } = require("sequelize");
 require("dotenv").config();
 const config = require("./config");
 
-const actorModel = require("../models/Actor");
-const directorModel = require("../models/Director");
-const genreModel = require("../models/Genre");
-const movieModel = require("../models/Movie");
-const castModel = require("../models/Cast");
-const userModel = require("../models/User");
+const actorModel = require("../models/actor");
+const directorModel = require("../models/director");
+const genreModel = require("../models/genre");
+const movieModel = require("../models/movie");
+const castModel = require("../models/cast");
+const userModel = require("../models/user");
 
 const sequelize = new Sequelize(config.database, config.username, config.password, {
   host: config.host,
