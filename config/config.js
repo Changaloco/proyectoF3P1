@@ -9,7 +9,7 @@ const config = {
   dialect: 'mysql',
   appPort: 3000,
   secret: 'elpalancasjimenez',
-  secretExp: '1m'
+  secretExp: '24d'
 };
 
 if(process.env.NODE_ENV == 'production'){

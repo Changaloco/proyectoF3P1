@@ -34,7 +34,7 @@ router.post('/register', async (req, res) => {
         const newUser = await User.create({email,password,name,surname,type});
         await newUser.save();
         delete newUser.dataValues.password;
-        user = User.findOne({where:{email:email}});
+        user = await User.findOne({where:{email:email}});
         const token = generateAccessToken(user);
         newUser.setDataValue('token',token);
         return res.status(200).json({msg:"User created",data:newUser});
