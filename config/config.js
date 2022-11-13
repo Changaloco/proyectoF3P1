@@ -18,7 +18,7 @@ if(process.env.NODE_ENV == 'production'){
   config.database = process.env.DB_DATABASE;
   config.host = process.env.DB_HOST;
   config.port = process.env.DB_PORT;
-  config.appPort = process.env.APP_PORT;
+  config.appPort = process.env.PORT;
   config.secret = process.env.JWT_SECRETKEY;
   config.secretExp = process.env.JWT_EXPIRESIN;
 }
